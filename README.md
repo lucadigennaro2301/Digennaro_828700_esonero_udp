@@ -13,14 +13,14 @@ Il repository è organizzato in due progetti Eclipse CDT separati:
 
 ```
 .
-├── client-project/          # Progetto Eclipse per il client
+├── client-project/         # Progetto Eclipse per il client
 │   ├── .project            # Configurazione progetto Eclipse
 │   ├── .cproject           # Configurazione Eclipse CDT
 │   └── src/
 │       ├── main.c          # File principale del client
 │       └── header.h        # Header con definizioni e prototipi
 │
-└── server-project/          # Progetto Eclipse per il server
+└── server-project/         # Progetto Eclipse per il server
     ├── .project            # Configurazione progetto Eclipse
     ├── .cproject           # Configurazione Eclipse CDT
     └── src/
@@ -57,7 +57,7 @@ Per ciascun progetto (client e server):
 3. Verificare che il **Current toolchain** sia corretto per il proprio sistema operativo:
    - **Linux**: GCC
    - **macOS**: GCC
-   - **Windows**: MinGW GCC
+   - **Windows**: MinGW GCC (Assicurarsi di avere già installato MinGW o MinGW-w64)
 
 #### Solo per Windows: Aggiungere libreria Winsock
 Per compilare su Windows, è necessario linkare la libreria Winsock:
@@ -67,17 +67,6 @@ Per compilare su Windows, è necessario linkare la libreria Winsock:
 4. In **Libraries (-l)**, cliccare su `Add` e inserire: `wsock32`
 5. Applicare le modifiche e cliccare `OK`
 
-### 4. Compilazione su diversi sistemi operativi
-
-#### Linux / macOS
-Il progetto è configurato per compilare direttamente con GCC.
-
-#### Windows
-Assicurarsi di avere installato:
-- MinGW o MinGW-w64
-- Eclipse CDT configurato per utilizzare il compilatore MinGW
-
-La libreria Winsock2 sarà automaticamente inizializzata grazie al codice boilerplate.
 
 ## File Principali
 
