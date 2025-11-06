@@ -2,22 +2,22 @@
  * header.h
  *
  * Server header file
- * Definizioni, costanti e firme delle funzioni per il server
+ * Definitions, constants and function prototypes for the server
  */
 
 #ifndef HEADER_H_
 #define HEADER_H_
 
-// Parametri condivisi dell'applicazione
-#define SERVER_PORT 27015  // Porta del server (modificare se necessario)
-#define BUFFER_SIZE 512    // Dimensione del buffer per messaggi
-#define QUEUE_SIZE 5       // Dimensione della coda di connessioni in attesa
+// Shared application parameters
+#define SERVER_PORT 27015  // Server port (change if needed)
+#define BUFFER_SIZE 512    // Buffer size for messages
+#define QUEUE_SIZE 5       // Size of pending connections queue
 
-// Prototipi delle funzioni
-// Inserire qui le firme delle funzioni implementate dagli studenti
+// Function prototypes
+// Add here the signatures of the functions implemented by students
 
 /*
- * Esempio di funzione da implementare:
+ * Example function to implement:
  * int handle_client(int client_socket);
  */
 

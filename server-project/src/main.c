@@ -1,10 +1,10 @@
 /*
  * main.c
  *
- * Server TCP - Template per esercitazione Reti di Calcolatori
+ * TCP Server - Template for Computer Networks assignment
  *
- * Questo file contiene il codice boilerplate per un server TCP
- * portabile su Windows, Linux e MacOS.
+ * This file contains the boilerplate code for a TCP server
+ * portable across Windows, Linux and macOS.
  */
 
 #if defined WIN32
@@ -34,7 +34,7 @@ void clearwinsock() {
 
 int main(int argc, char *argv[]) {
 
-	// TODO: Implementare la logica del server
+	// TODO: Implement server logic
 
 #if defined WIN32
 	// Initialize Winsock
@@ -48,29 +48,29 @@ int main(int argc, char *argv[]) {
 
 	int my_socket;
 
-	// TODO: Creare il socket
+	// TODO: Create socket
 	// my_socket = socket(...);
 
-	// TODO: Configurare l'indirizzo del server
+	// TODO: Configure server address
 	// struct sockaddr_in server_addr;
 	// server_addr.sin_family = AF_INET;
 	// server_addr.sin_port = htons(SERVER_PORT);
 	// server_addr.sin_addr.s_addr = INADDR_ANY;
 
-	// TODO: Bind del socket
+	// TODO: Bind socket
 	// bind(...);
 
-	// TODO: Mettere il socket in ascolto
+	// TODO: Set socket to listen
 	// listen(...);
 
-	// TODO: Implementare il ciclo di accettazione connessioni
+	// TODO: Implement connection acceptance loop
 	// while (1) {
 	//     int client_socket = accept(...);
-	//     // Gestire la comunicazione con il client
+	//     // Handle client communication
 	//     closesocket(client_socket);
 	// }
 
-	printf("Server terminato.\n");
+	printf("Server terminated.\n");
 
 	closesocket(my_socket);
 	clearwinsock();

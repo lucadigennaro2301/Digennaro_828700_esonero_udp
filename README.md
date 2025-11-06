@@ -116,31 +116,7 @@ Gli studenti devono:
 
 ## Note Importanti
 
-- Non modificare il codice boilerplate per la portabilità
-- Testare il codice su almeno due sistemi operativi diversi se possibile
 - Utilizzare le costanti definite in `header.h` invece di valori hardcoded
-- Gestire correttamente gli errori delle chiamate di sistema
-- Chiudere sempre i socket aperti prima di terminare
-
-## Compilazione da Terminale (Opzionale)
-
-### Linux / macOS
-```bash
-cd client-project/src
-gcc -o client main.c
-
-cd server-project/src
-gcc -o server main.c
-```
-
-### Windows (MinGW)
-```bash
-cd client-project/src
-gcc -o client.exe main.c -lws2_32
-
-cd server-project/src
-gcc -o server.exe main.c -lws2_32
-```
 
 ## Risorse Utili
 
