@@ -47,6 +47,29 @@ struct response {
 };
 ```
 
+### Network Byte Order
+
+**IMPORTANTE**: Durante la serializzazione e deserializzazione delle strutture dati, è necessario gestire correttamente il network byte order per i campi numerici:
+
+- **`unsigned int status`**: usare `htonl()` prima dell'invio e `ntohl()` dopo la ricezione
+- **`float value`**: convertire in formato network byte order usando la tecnica mostrata a lezione (conversione float → uint32_t → htonl/ntohl → float)
+- **`char type` e `char city[]`**: essendo campi a singolo byte, non richiedono conversione
+
+Esempio conversione float (come mostrato a lezione):
+```c
+// Invio: float -> network byte order
+uint32_t temp;
+memcpy(&temp, &value, sizeof(float));
+temp = htonl(temp);
+memcpy(&response.value, &temp, sizeof(float));
+
+// Ricezione: network byte order -> float
+uint32_t temp;
+memcpy(&temp, &response.value, sizeof(float));
+temp = ntohl(temp);
+memcpy(&value, &temp, sizeof(float));
+```
+
 ### Formati di Output
 
 I formati di output rimangono **identici** al primo esonero:
@@ -125,6 +148,12 @@ Le città supportate rimangono **identiche** al primo esonero. Il server deve ri
 - Firenze
 - Venezia
 
+**Note sulla validazione nomi città:**
+- Le città possono contenere spazi singoli (es. "San Marino")
+- Le città con **spazi multipli consecutivi** sono gestite normalizzando gli spazi (es. "San  Marino" → "San Marino")
+- **Caratteri speciali** (es. @, #, $, %, ecc.) e **caratteri di tabulazione** non sono ammessi e devono causare un errore di validazione
+- Il confronto rimane case-insensitive (es. "bari", "BARI", "Bari" sono tutti validi)
+
 ## Requisiti Tecnici
 
 ### 1. Organizzazione del Codice
@@ -145,6 +174,7 @@ Utilizzare direttive di preprocessore (`#ifdef _WIN32`) per gestire le differenz
 - Nessun memory leak
 - Validazione corretta degli input utente
 - Gestione appropriata degli errori di sistema
+- **Validazione lunghezza nome città (lato client)**: se il nome della città supera 64 caratteri, il client deve troncare la stringa a 63 caratteri (lasciando spazio per il null-terminator) oppure segnalare un errore all'utente prima dell'invio
 
 ### 4. Risoluzione Nomi DNS
 - **IMPORTANTE**: Il client deve utilizzare "localhost" come indirizzo predefinito invece di 127.0.0.1
