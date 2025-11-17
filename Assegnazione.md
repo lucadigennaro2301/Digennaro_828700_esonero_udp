@@ -12,11 +12,9 @@ L'obiettivo è prendere il codice già scritto per l'assegnazione TCP e modifica
 Nel passaggio da TCP a UDP, dovrete modificare **solo il livello di trasporto**, lasciando invariato tutto il resto:
 
 **DA MODIFICARE:**
-- Tipo di socket: da `SOCK_STREAM` a `SOCK_DGRAM`
-- Chiamate di sistema:
-  - Client: da `connect()` + `send()`/`recv()` a `sendto()`/`recvfrom()`
-  - Server: da `listen()` + `accept()` + `send()`/`recv()` a `sendto()`/`recvfrom()`
-- Gestione affidabilità: implementare timeout e ritrasmissione lato client
+- Tipo di socket
+- Chiamate di sistema
+- Gestione affidabilità (implementare timeout e ritrasmissione lato client)
 
 **NON MODIFICARE:**
 - Protocollo applicativo: strutture `struct request` e `struct response`
