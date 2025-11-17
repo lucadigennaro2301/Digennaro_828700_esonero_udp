@@ -38,6 +38,11 @@ struct request {
 };
 ```
 
+**Note di validazione:**
+- Il campo `city` ha una lunghezza massima di 64 caratteri (incluso il terminatore `\0`)
+- **Validazione lato client**: Il client deve verificare che il nome della città non superi 63 caratteri prima di inviare la richiesta
+- Il campo `city` può contenere spazi multipli, ma **non ammette caratteri di tabulazione** (`\t`)
+
 **Risposta Server:**
 ```c
 struct response {
@@ -71,7 +76,8 @@ I formati di output rimangono **identici** al primo esonero:
 **Parametri:**
 - `-s server`: indirizzo server (default: localhost)
 - `-p port`: porta server (default: 56700)
-- `-r request`: richiesta meteo obbligatoria
+- `-r request`: richiesta meteo obbligatoria (formato: `"type city"`)
+  - **Importante**: La stringa della richiesta può contenere spazi multipli, ma **non ammette caratteri di tabulazione** (`\t`)
 
 **Flusso operativo:**
 1. Analizza argomenti da linea di comando
@@ -102,6 +108,7 @@ Il server rimane attivo continuamente in ascolto sulla porta specificata. Per og
 **Note:**
 - Non c'è fase di "connessione" o "accettazione" come in TCP
 - Ogni richiesta è indipendente e stateless
+- **Il server non termina autonomamente**: rimane in esecuzione indefinitamente e può essere interrotto solo forzatamente tramite **Ctrl+C** (SIGINT)
 
 ## Funzioni di Generazione Dati
 
