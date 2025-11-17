@@ -1,10 +1,31 @@
-# Primo Esonero di Laboratorio - Reti di Calcolatori (ITPS A-L) 2025-26
+# Secondo Esonero di Laboratorio - Reti di Calcolatori (ITPS A-L) 2025-26
 
 ## Obiettivo Generale
-Realizzare un'applicazione **UDP** client/server che implementa un servizio meteo, dove il server risponde alle richieste climatiche dei client utilizzando il protocollo UDP (User Datagram Protocol).
+**Migrare** l'applicazione client/server del servizio meteo dal protocollo **TCP** (realizzata nel primo esonero) al protocollo **UDP** (User Datagram Protocol).
 
-## Differenze rispetto al TCP
-Questa assegnazione richiede l'implementazione di un'applicazione basata su **UDP** anziché TCP. Le principali differenze da considerare sono:
+L'obiettivo è prendere il codice già scritto per l'assegnazione TCP e modificarlo per utilizzare UDP, mantenendo invariato il protocollo applicativo (strutture dati, formati, funzionalità).
+
+## Cosa Cambia nella Migrazione da TCP a UDP
+
+### Modifiche da Apportare al Codice
+
+Nel passaggio da TCP a UDP, dovrete modificare **solo il livello di trasporto**, lasciando invariato tutto il resto:
+
+**DA MODIFICARE:**
+- Tipo di socket: da `SOCK_STREAM` a `SOCK_DGRAM`
+- Chiamate di sistema:
+  - Client: da `connect()` + `send()`/`recv()` a `sendto()`/`recvfrom()`
+  - Server: da `listen()` + `accept()` + `send()`/`recv()` a `sendto()`/`recvfrom()`
+- Gestione affidabilità: implementare timeout e ritrasmissione lato client
+
+**NON MODIFICARE:**
+- Protocollo applicativo: strutture `struct request` e `struct response`
+- Interfaccia a linea di comando (opzioni `-s`, `-p`, `-r`)
+- Logica di business: parsing richieste, validazione città, generazione dati meteo
+- Formati di output
+- Funzioni `get_temperature()`, `get_humidity()`, `get_wind()`, `get_pressure()`
+
+### Caratteristiche del Protocollo UDP
 
 - **Connectionless**: UDP non stabilisce una connessione prima dello scambio dati
 - **Inaffidabilità**: UDP non garantisce la consegna dei pacchetti, né il loro ordine
@@ -13,22 +34,32 @@ Questa assegnazione richiede l'implementazione di un'applicazione basata su **UD
 
 ## Protocollo Applicativo
 
+**IMPORTANTE**: Il protocollo applicativo rimane **identico** all'assegnazione TCP. Le strutture dati definite in `protocol.h` **NON devono essere modificate**.
+
 ### Strutture Dati
+
+Le seguenti strutture devono rimanere invariate rispetto al primo esonero:
 
 **Richiesta Client:**
 ```c
-char type;      // 't'=temperatura, 'h'=umidità, 'w'=vento, 'p'=pressione
-char city[64];  // nome città (null-terminated)
+struct request {
+    char type;      // 't'=temperatura, 'h'=umidità, 'w'=vento, 'p'=pressione
+    char city[64];  // nome città (null-terminated)
+};
 ```
 
 **Risposta Server:**
 ```c
-unsigned int status;  // 0=successo, 1=città non trovata, 2=richiesta invalida
-char type;            // eco del tipo richiesto
-float value;          // dato meteo generato
+struct response {
+    unsigned int status;  // 0=successo, 1=città non trovata, 2=richiesta invalida
+    char type;            // eco del tipo richiesto
+    float value;          // dato meteo generato
+};
 ```
 
 ### Formati di Output
+
+I formati di output rimangono **identici** al primo esonero:
 
 **Successo (status=0):**
 - Temperatura: `"NomeCittà: Temperatura = XX.X°C"`
@@ -39,7 +70,7 @@ float value;          // dato meteo generato
 **Errori:**
 - Status 1: "Città non disponibile"
 - Status 2: "Richiesta non valida"
-- Timeout: "Timeout: nessuna risposta dal server"
+- **Nuovo**: Timeout: "Timeout: nessuna risposta dal server" (specifico per UDP)
 
 ## Interfaccia Client
 
@@ -92,7 +123,7 @@ Il server rimane attivo continuamente in ascolto sulla porta specificata. Per og
 
 ## Funzioni di Generazione Dati
 
-Il server implementa quattro funzioni che generano valori casuali:
+Le funzioni di generazione dati rimangono **identiche** al primo esonero. Il server implementa quattro funzioni che generano valori casuali:
 - `get_temperature()`: temperatura casuale tra -10.0 e 40.0 °C
 - `get_humidity()`: umidità casuale tra 20.0 e 100.0%
 - `get_wind()`: velocità vento casuale tra 0.0 e 100.0 km/h
@@ -100,7 +131,7 @@ Il server implementa quattro funzioni che generano valori casuali:
 
 ## Città Supportate
 
-Il server deve riconoscere almeno 10 città italiane (confronto case-insensitive):
+Le città supportate rimangono **identiche** al primo esonero. Il server deve riconoscere almeno 10 città italiane (confronto case-insensitive):
 - Bari
 - Roma
 - Milano
@@ -115,9 +146,9 @@ Il server deve riconoscere almeno 10 città italiane (confronto case-insensitive
 ## Requisiti Tecnici
 
 ### 1. Organizzazione del Codice
-- **File header `protocol.h`**: contiene le definizioni delle strutture dati, i prototipi delle funzioni e le costanti condivise tra client e server
-- **File sorgente client**: `client.c` nell'apposita directory
-- **File sorgente server**: `server.c` nell'apposita directory
+- **File header `protocol.h`**: riutilizzare lo stesso file del primo esonero, che contiene le definizioni delle strutture dati (`struct request`, `struct response`), i prototipi delle funzioni e le costanti condivise tra client e server
+- **File sorgente client**: `client.c` nell'apposita directory - modificare solo le parti relative ai socket
+- **File sorgente server**: `server.c` nell'apposita directory - modificare solo le parti relative ai socket
 
 ### 2. Portabilità Multi-Piattaforma
 Il codice deve compilare ed eseguire correttamente su:
