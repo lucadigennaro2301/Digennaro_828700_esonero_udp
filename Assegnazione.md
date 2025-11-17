@@ -59,15 +59,15 @@ struct response {
 
 I formati di output rimangono **identici** al primo esonero:
 
-**Successo (status=0):**
+**Successo (`status=0`):**
 - Temperatura: `"NomeCittà: Temperatura = XX.X°C"`
 - Umidità: `"NomeCittà: Umidità = XX.X%"`
 - Vento: `"NomeCittà: Vento = XX.X km/h"`
 - Pressione: `"NomeCittà: Pressione = XXXX.X hPa"`
 
 **Errori:**
-- Status 1: "Città non disponibile"
-- Status 2: "Richiesta non valida"
+- `status 1`: "Città non disponibile"
+- `status 2`: "Richiesta non valida"
 - **Nuovo**: Timeout: "Timeout: nessuna risposta dal server" (specifico per UDP)
 
 ## Interfaccia Client
