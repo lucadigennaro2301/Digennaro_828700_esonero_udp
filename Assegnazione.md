@@ -22,12 +22,6 @@ Nel passaggio da TCP a UDP, dovrete modificare **solo il livello di trasporto**,
 - Formati di output
 - Funzioni `get_temperature()`, `get_humidity()`, `get_wind()`, `get_pressure()`
 
-### Caratteristiche del Protocollo UDP
-
-- **Connectionless**: UDP non stabilisce una connessione prima dello scambio dati
-- **Inaffidabilità**: UDP non garantisce la consegna dei pacchetti, né il loro ordine
-- **Dimensione pacchetti**: Considerare la dimensione massima dei datagrammi UDP
-
 ## Protocollo Applicativo
 
 **IMPORTANTE**: Il protocollo applicativo rimane **identico** all'assegnazione TCP. Le strutture dati definite in `protocol.h` **NON devono essere modificate**.
@@ -99,7 +93,7 @@ I formati di output rimangono **identici** al primo esonero:
 
 **Comportamento:**
 Il server rimane attivo continuamente in ascolto sulla porta specificata. Per ogni datagramma ricevuto:
-1. Riceve richiesta con (acquisendo indirizzo client)
+1. Riceve richiesta (acquisendo indirizzo client)
 2. Valida il tipo di richiesta e il nome della città
 3. Genera il valore meteo con le funzioni `get_*()`
 4. Invia risposta al client, usando l'indirizzo acquisito
@@ -107,7 +101,6 @@ Il server rimane attivo continuamente in ascolto sulla porta specificata. Per og
 
 **Note:**
 - Non c'è fase di "connessione" o "accettazione" come in TCP
-- Il server può gestire richieste da client multipli in modo concorrente
 - Ogni richiesta è indipendente e stateless
 
 ## Funzioni di Generazione Dati
