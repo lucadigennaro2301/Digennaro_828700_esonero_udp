@@ -74,7 +74,7 @@ Per compilare su Windows, è necessario linkare la libreria Winsock:
 
 ### protocol.h
 Contiene:
-- **Costanti condivise**: numero di porta del server, dimensione buffer, ecc.
+- **Costanti condivise**: numero di porta del server, dimensione del buffer, ecc.
 - **Prototipi delle funzioni**: inserire qui le firme di tutte le funzioni implementate
 
 Esempio:
@@ -92,26 +92,9 @@ Contiene:
 - **Inizializzazione Winsock** su Windows
 - **Sezioni TODO** dove implementare la logica dell'applicazione
 
-## Implementazione dell'Assegnazione
+## Specifiche dell'Assegnazione
 
-Gli studenti devono:
-
-1. **Definire i parametri** nel file `protocol.h`:
-   - Numero di porta dell'applicazione
-   - Dimensione dei buffer
-   - Altre costanti necessarie
-
-2. **Implementare le funzioni** necessarie:
-   - Aggiungere i prototipi nel file `protocol.h`
-   - Implementare le funzioni nel file `main.c`
-
-3. **Completare il codice** seguendo le sezioni TODO:
-   - **Client**: creazione socket UDP, configurazione indirizzo server, invio/ricezione datagrammi
-   - **Server**: creazione socket UDP, bind, ricezione/invio datagrammi
-
-## Note Importanti
-
-- Utilizzare le costanti definite in `protocol.h` invece di valori hardcoded
+[Protocollo applicativo e istruzioni per la consegna](Assegnazione.md)
 
 ## Licenza
 
