@@ -73,7 +73,7 @@ I formati di output rimangono **identici** al primo esonero:
 ```
 
 **Parametri:**
-- `-s server`: indirizzo server (default: localhost)
+- `-s server`: server può indicare o l'hostname del server oppure il suo indirizzo IP (default: localhost) 
 - `-p port`: porta server (default: 56700)
 - `-r request`: richiesta meteo obbligatoria (formato: `"type city"`)
 
