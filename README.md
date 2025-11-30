@@ -137,34 +137,17 @@ git add .
 git commit -m "Descrizione chiara delle modifiche"
 ```
 
-**Best Practices per i Messaggi di Commit:**
-- Usare messaggi descrittivi e concisi
-- Descrivere **cosa** è stato modificato e **perché**
-- Esempi:
-  - ✅ `"Implementa ricezione datagrammi UDP nel server"`
-  - ✅ `"Corregge gestione errori in sendto()"`
-  - ❌ `"Update"` (troppo generico)
-  - ❌ `"Fix"` (non specifica cosa è stato corretto)
-
 #### 5. Inviare le Modifiche al Repository Remoto
 
 ```bash
 git push
-```
+``
 
-### Frequenza dei Commit
+#### 6. Rimanere sincronizzati se lavorare in coppia
 
-- **Committare frequentemente**: ogni volta che si completa una funzionalità o si risolve un bug
-- **Pushare regolarmente**: almeno una volta al giorno di lavoro
-- **Evitare commit troppo grandi**: meglio tanti piccoli commit che uno enorme
-
-### Lavorare in Coppia
-
-Se l'esonero è svolto in coppia:
-- Comunicare prima di pushare modifiche importanti
-- Fare `git pull` frequentemente per rimanere sincronizzati
-- In caso di conflitti, risolverli insieme
-- Usare branch separati per funzionalità diverse (opzionale ma consigliato)
+```bash
+git pull
+``
 
 ## Licenza
 
