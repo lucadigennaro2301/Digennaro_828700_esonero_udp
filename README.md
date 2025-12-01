@@ -143,11 +143,13 @@ git commit -m "Descrizione chiara delle modifiche"
 git push
 ```
 
-#### 6. Rimanere sincronizzati se lavorare in coppia
+#### 6. Rimanere sincronizzati se lavorate in coppia
 
 ```bash
 git pull
 ```
+
+Eseguirlo di frequente, prima di ogni commit.
 
 ## Licenza
 
